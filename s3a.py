@@ -201,7 +201,7 @@ class S3A:
 
         if sys.platform.startswith('win32'):
             return subprocess.Popen(hwgw_start,
-                                    creationflags=subprocess.CREATE_NEW_CONSOLE)
+                                    creationflags=subprocess.CREATE_NO_WINDOW)
         else:
             return subprocess.Popen(hwgw_start,
                                     stdin=subprocess.PIPE, stderr=subprocess.PIPE,
