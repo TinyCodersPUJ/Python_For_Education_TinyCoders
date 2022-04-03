@@ -20,7 +20,6 @@ import pathlib
 import signal
 import sys
 
-
 from pymata_express.private_constants import PrivateConstants
 from pymata_express.pymata_express import PymataExpress
 
@@ -93,6 +92,7 @@ class ArduinoGateway(GatewayBaseAIO):
         self.first_analog_pin = self.arduino.first_analog_pin
 
         # Initialize the parent
+        print("Initialize the parent")
         super(ArduinoGateway, self).__init__(subscriber_list=subscriber_list,
                                              event_loop=self.event_loop,
                                              back_plane_ip_address=back_plane_ip_address,
@@ -100,7 +100,7 @@ class ArduinoGateway(GatewayBaseAIO):
                                              publisher_port=publisher_port,
                                              process_name=process_name,
                                              )
-
+        print("END INITIALIZE")
         self.first_analog_pin = self.arduino.first_analog_pin
         self.keep_alive = keep_alive
 
@@ -111,6 +111,7 @@ class ArduinoGateway(GatewayBaseAIO):
         the gateway base parent in its init method.
         NOTE: that this a a non-asyncio method.
         """
+        print("init_pins_dictionary")
         report = self.event_loop.run_until_complete(self.arduino.get_capability_report())
         x = 0
         pin = 0
