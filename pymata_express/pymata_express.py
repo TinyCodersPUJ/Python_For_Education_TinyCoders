@@ -383,7 +383,7 @@ class PymataExpress:
                 continue
             # convert i_am_here to a list
             i_am_here = list(i_am_here)
-
+            print(i_am_here)
             if len(i_am_here) == 4:
                 var_i_am_here = i_am_here[1]
                 var_arduino_instance_id = i_am_here[2]
@@ -1325,6 +1325,7 @@ class PymataExpress:
             pin_number = pin_number + self.first_analog_pin
 
         command = [PrivateConstants.SET_PIN_MODE, pin_number, pin_mode]
+        
         await self._send_command(command)
 
         if pin_state == PrivateConstants.INPUT or pin_state == PrivateConstants.PULLUP:
