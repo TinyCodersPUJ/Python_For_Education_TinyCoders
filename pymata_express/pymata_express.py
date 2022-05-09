@@ -1448,6 +1448,32 @@ class PymataExpress:
                 direction]
         await self._send_sysex(PrivateConstants.STEPPER_DATA, data)
 
+    async def led_rgb(self, red, blue, green):
+        """
+        This is a Hardware for Education feature
+
+        control an RGB led connected to digital pins 2 3 and 4 respectively
+
+        :param red: red value
+
+        :param blue: blue value
+
+        :param green: green value
+
+        """
+        data = [red,green,blue]
+        await self._send_sysex(PrivateConstants.LED_RGB, data)
+
+    async def set_led_rgb(self):
+        """
+        Must be overwritten by the hardware gateway class.
+        set the RGB led connected to digital pins 2 3 and 4 respectively
+
+        """
+        print("SET LED RGB")
+        data = []
+        await self._send_sysex(PrivateConstants.LED_RGB,data)
+
     async def _arduino_report_dispatcher(self):
         """
         This is a private method.

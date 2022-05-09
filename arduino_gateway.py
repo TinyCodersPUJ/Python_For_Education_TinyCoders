@@ -23,7 +23,8 @@ import sys
 from pymata_express.private_constants import PrivateConstants
 from pymata_express.pymata_express import PymataExpress
 
-from python_banyan.gateway_base_aio import GatewayBaseAIO
+#from python_banyan.gateway_base_aio import GatewayBaseAIO
+from gateway_base_aio import GatewayBaseAIO
 
 
 # noinspection PyAbstractClass,PyMethodMayBeStatic,PyRedundantParentheses,DuplicatedCode
@@ -370,6 +371,27 @@ class ArduinoGateway(GatewayBaseAIO):
         """
         await self.arduino.stepper_write(payload['motor_speed'],
                                          payload['number_of_steps'])
+
+    async def led_rgb(self, topic, payload):
+        """
+        Send only one message to control an RGB led connected to digital pins 2 3 and 4 respectively
+
+        :param topic:
+        :param payload: {"command": "led_rgb", "red": “RED”,
+                         "blue":”BLUE”, "green": "GREEN" }
+
+        """
+        await self.arduino.led_rgb(payload['red'],payload['blue'],payload['green'])
+
+    async def set_led_rgb(self, topic, payload):
+        """
+        Send only one message to control an RGB led connected to digital pins 2 3 and 4 respectively
+
+        :param topic:
+        :param payload: {"command": "set_led_rgb"}
+
+        """
+        await self.arduino.set_led_rgb()
 
     # Callbacks
     async def digital_input_callback(self, data):

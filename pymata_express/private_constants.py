@@ -131,3 +131,7 @@ class PrivateConstants:
     I2C_END_TX_MASK = 0B01000000
     I2C_STOP_TX = 1
     I2C_RESTART_TX = 0
+
+# start of Hardware for Education defined SYSEX commands
+    LED_RGB = 0x55  # Led RGB control messages
+# end of Hardware for Education defined SYSEX commands
