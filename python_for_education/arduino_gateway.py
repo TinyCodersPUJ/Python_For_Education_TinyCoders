@@ -20,8 +20,8 @@ import pathlib
 import signal
 import sys
 
-from pymata_express.private_constants import PrivateConstants
-from pymata_express.pymata_express import PymataExpress
+from pymata_express_H4E.private_constants import PrivateConstants
+from pymata_express_H4E.pymata_express import PymataExpress
 
 #from python_banyan.gateway_base_aio import GatewayBaseAIO
 from gateway_base_aio import GatewayBaseAIO
@@ -392,7 +392,28 @@ class ArduinoGateway(GatewayBaseAIO):
 
         """
         await self.arduino.set_led_rgb()
+    
+    async def lcd(self, topic, payload):
+        """
+        Must be overwritten by the hardware gateway class.
 
+
+        :param topic:
+        :param payload: {"command": "lcd", "string": "STRING", "line": LINE}
+
+        """
+        await self.arduino.lcd(payload['string'], payload['line'])
+
+    async def lcd(self, topic, payload):
+        """
+        Must be overwritten by the hardware gateway class.
+
+
+        :param topic:
+        :param payload: {"command": "clear_lcd"}
+
+        """
+        await self.arduino.clear_lcd()
     # Callbacks
     async def digital_input_callback(self, data):
         """

@@ -1,5 +1,5 @@
-from Hardware_Educacion import *
-import s3a
+from python_for_education.Hardware_Educacion import *
+import python_for_education.s3a as s3a
 
 class MainWindow(QtWidgets.QMainWindow, Ui_Dialog):
     def __init__(self, *args, **kwargs):

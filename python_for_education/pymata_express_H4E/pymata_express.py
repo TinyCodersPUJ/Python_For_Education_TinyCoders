@@ -24,10 +24,10 @@ from serial.serialutil import SerialException
 # noinspection PyPackageRequirements
 from serial.tools import list_ports
 
-from pymata_express.pin_data import PinData
-from pymata_express.private_constants import PrivateConstants
-from pymata_express.pymata_express_serial import PymataExpressSerial
-from pymata_express.pymata_express_socket import PymataExpressSocket
+from pin_data import PinData
+from private_constants import PrivateConstants
+from pymata_express_serial import PymataExpressSerial
+from pymata_express_socket import PymataExpressSocket
 
 
 class PymataExpress:
@@ -200,6 +200,8 @@ class PymataExpress:
                                        self._sonar_data,
                                    PrivateConstants.DHT_DATA:
                                        self._dht_read_response,
+                                    PrivateConstants.ACC:
+                                       self._acc_data,
                                    }
 
         # report query results are stored in this dictionary
@@ -1470,9 +1472,28 @@ class PymataExpress:
         set the RGB led connected to digital pins 2 3 and 4 respectively
 
         """
-        print("SET LED RGB")
         data = []
         await self._send_sysex(PrivateConstants.LED_RGB,data)
+
+    async def lcd(self, string, line):
+        """
+        Must be overwritten by the hardware gateway class.
+        Send a string to be painted in the LCD screen
+
+        """
+        data = [line, len(string)]
+        for c in string:
+            data.append(c)
+        await self._send_sysex(PrivateConstants.LCD,data)
+
+    async def clear_lcd(self):
+        """
+        Must be overwritten by the hardware gateway class.
+        Send a string to be painted in the LCD screen
+
+        """
+        data = []
+        await self._send_sysex(PrivateConstants.CLEAR_LCD,data)
 
     async def _arduino_report_dispatcher(self):
         """
@@ -1942,3 +1963,15 @@ class PymataExpress:
                 current_command.append(next_command_byte)
                 number_of_bytes -= 1
         return current_command
+
+    async def _acc_data(self, data):
+        """
+        Process the accelerometer response message.
+
+        :param: data: [pin, dht_type, validation_flag,
+        humidity_positivity_flag, temperature_positivity_flag, humidity, temperature]
+        :param: data: [acc_x, acc_y, acc_z]
+        """
+        acc_x = data[0]
+        acc_y = data[1]
+        acc_z = data[2]

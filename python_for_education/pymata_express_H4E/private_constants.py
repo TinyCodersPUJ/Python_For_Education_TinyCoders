@@ -134,4 +134,7 @@ class PrivateConstants:
 
 # start of Hardware for Education defined SYSEX commands
     LED_RGB = 0x55  # Led RGB control messages
+    LCD = 0x56  # LCD to hardware
+    CLEAR_LCD = 0x57  # clear LCD
+    ACC = 0x58  # Accelerometer Data
 # end of Hardware for Education defined SYSEX commands

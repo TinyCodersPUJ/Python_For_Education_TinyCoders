@@ -147,6 +147,8 @@ class GatewayBaseAIO(BanyanBaseAIO):
                                    'stepper_write': self.stepper_write,
                                    'set_led_rgb' : self.set_led_rgb,
                                    'led_rgb' : self.led_rgb,
+                                   'lcd': self.lcd,
+                                   'clear_lcd': self.clear_lcd
                                    }
 
     def init_pins_dictionary(self):
@@ -479,3 +481,18 @@ class GatewayBaseAIO(BanyanBaseAIO):
         """
         raise NotImplementedError
 
+    async def lcd(self):
+        """
+        Must be overwritten by the hardware gateway class.
+        
+
+        """
+        raise NotImplementedError
+
+    async def clear_lcd(self):
+        """
+        Must be overwritten by the hardware gateway class.
+        
+
+        """
+        raise NotImplementedError
