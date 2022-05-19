@@ -24,10 +24,10 @@ from serial.serialutil import SerialException
 # noinspection PyPackageRequirements
 from serial.tools import list_ports
 
-from pin_data import PinData
-from private_constants import PrivateConstants
-from pymata_express_serial import PymataExpressSerial
-from pymata_express_socket import PymataExpressSocket
+from pymata_express_H4E.pin_data import PinData
+from pymata_express_H4E.private_constants import PrivateConstants
+from pymata_express_H4E.pymata_express_serial import PymataExpressSerial
+from pymata_express_H4E.pymata_express_socket import PymataExpressSocket
 
 
 class PymataExpress:
