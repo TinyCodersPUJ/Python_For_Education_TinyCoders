@@ -1,4 +1,6 @@
+from gettext import install
 from python_for_education.Hardware_Educacion import *
+from install import * 
 import python_for_education.s3a as s3a
 
 import subprocess
@@ -10,6 +12,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Dialog):
         self.setupUi(self)
 
         self.pushButton.clicked.connect(self.iniciar)
+        self.pushButton_2.clicked.connect(self.instalar)
+    def instalar(self):
+        pass
+        '''if sys.platform.startswith('win32'):
+            return subprocess.Popen(['python','./python_for_education/install.py'],
+                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+                                                  |
+                                                  subprocess.CREATE_NEW_CONSOLE)
+        else:
+            return subprocess.Popen(['python','./python_for_education/install.py'],
+                                    stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdout=subprocess.PIPE)
+    '''
     def iniciar(self):
         ##s3a.s3ax()
         if sys.platform.startswith('win32'):
