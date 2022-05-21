@@ -404,7 +404,7 @@ class ArduinoGateway(GatewayBaseAIO):
         """
         await self.arduino.lcd(payload['string'], payload['line'])
 
-    async def lcd(self, topic, payload):
+    async def clear_lcd(self, topic, payload):
         """
         Must be overwritten by the hardware gateway class.
 

@@ -1465,6 +1465,9 @@ class PymataExpress:
         """
         data = [red,green,blue]
         await self._send_sysex(PrivateConstants.LED_RGB, data)
+        print("LCD")
+        print(data)
+
 
     async def set_led_rgb(self):
         """
@@ -1481,11 +1484,12 @@ class PymataExpress:
         Send a string to be painted in the LCD screen
 
         """
-        data = [line, len(string)]
+        data = [line]
         for c in string:
-            data.append(c)
-        await self._send_sysex(PrivateConstants.LCD,data)
-
+            data.append(ord(c))
+        
+        await self._send_sysex(PrivateConstants.CLEAR_LCD,data)
+        
     async def clear_lcd(self):
         """
         Must be overwritten by the hardware gateway class.
@@ -1493,7 +1497,7 @@ class PymataExpress:
 
         """
         data = []
-        await self._send_sysex(PrivateConstants.CLEAR_LCD,data)
+        await self._send_sysex(PrivateConstants.CLEAR_LCD,data)        
 
     async def _arduino_report_dispatcher(self):
         """

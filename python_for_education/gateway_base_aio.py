@@ -459,16 +459,14 @@ class GatewayBaseAIO(BanyanBaseAIO):
         """
         raise NotImplementedError
 
-    async def led_rgb(self, red, blue, green):
+    async def led_rgb(self, topic, payload):
         """
         Must be overwritten by the hardware gateway class.
         control an RGB led connected to digital pins 2 3 and 4 respectively
 
-        :param red: red value
+        :param topic: message topic
 
-        :param blue: blue value
-
-        :param green: green value
+        :param payload: message payload
 
         """
         raise NotImplementedError
@@ -481,18 +479,20 @@ class GatewayBaseAIO(BanyanBaseAIO):
         """
         raise NotImplementedError
 
-    async def lcd(self):
+    async def lcd(self, topic, payload):
         """
         Must be overwritten by the hardware gateway class.
         
+        :param topic: message topic
 
+        :param payload: message payload
         """
         raise NotImplementedError
 
     async def clear_lcd(self):
         """
         Must be overwritten by the hardware gateway class.
-        
+        Clear what appears on the LCD Screen.
 
         """
         raise NotImplementedError
