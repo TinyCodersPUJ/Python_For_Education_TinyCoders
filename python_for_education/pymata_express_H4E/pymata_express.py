@@ -1488,7 +1488,7 @@ class PymataExpress:
         for c in string:
             data.append(ord(c))
         
-        await self._send_sysex(PrivateConstants.CLEAR_LCD,data)
+        await self._send_sysex(PrivateConstants.LCD,data)
         
     async def clear_lcd(self):
         """
@@ -1497,7 +1497,7 @@ class PymataExpress:
 
         """
         data = []
-        await self._send_sysex(PrivateConstants.CLEAR_LCD,data)        
+        await self._send_sysex(PrivateConstants.LCD,data)        
 
     async def _arduino_report_dispatcher(self):
         """
