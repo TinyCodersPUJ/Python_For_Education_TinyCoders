@@ -28,4 +28,28 @@ Proyecto desarrollado en el marco del trabajo de grado como un requisito para op
   * *[Creating a Scratch3 Extension For GPIO Control - Part 4](https://mryslab.github.io/bots-in-pieces/scratch3/gpio/2019/10/17/scratch-3-4.html)*
   * *[Scratch 3 Extensions - Part 5 ](https://mryslab.github.io/bots-in-pieces/scratch3/picoboard/circuit-playground-express/2020/02/02/scratch3-5.html)*
 
+El repositorio contiene los distintos archivos desarrollados en Python para realizar la conexion entre el Scratch® modificado y el programa de Arduino. Los archivos principales se encuentran en la carpeta _python_for_education_ fuera de esta carpeta se encuentran los archivos relacionados con la interfaz grafica (imagenes y codigo) y los archivos de licencia correspondiente. 
+
+Dentro de la carpeta _python_for_education_ se encuentran los archivos correspondientes a la ejecucion de este programa:
+* El archivo _s3a.py_ es el programa principal. 
+* El archivo _install.py_ es un script para la instalacion de las librerias requeridas para la ejecucion del programa principal.
+* El archivo _websocket.py_ es aquel programa que crea la conexion entre el Scratch® modificado y el programa de Python. 
+* El archivo _backplane.py_ es aquel archivo que sirve de interconexion entre el WebSocket y el Arduino Gateway.
+* El archivo _gateway_base_aio.py_ es aquel archivo que lleva dentro las funciones que debe ejecutar cada gateway para cada dispositivo de conexion. 
+* El archivo _arduino_gateway.py_ es aquel que define las funciones propuestas en el archivo _gateway_base_aio.py_ para el caso del Arduino. 
+* La carpeta _pymata_express_H4E_ contiene distintos modulos que definen constantes y estructuras comunes para los demas programas. 
+
+
+### ⚒ Funcionamiento ⚒
+
+En la siguiente imagen se presenta una breve explicacion grafica de como los distintos archivos descritos anteriormente se comunican entre si para cumplir la funcion de interconectar el Scratch® modificado y el programa de Arduino. 
+
+<img src="" width="200" />
+
+Como bien se puede observar anteriormente, el Scratch® modificado envia sus mensajes a traves del programa _websocket.py_ hacia el _backplane.py_ este direcciona la comunicacion hacia el gateway correspondiente, en este caso el gateway es el programa _arduino_gateway.py_. Este ya es el punto que envia los mensajes al programa de Arduino a traves del protocolo Firmata. 
+
+#### ⚒ Funcionamiento interno ⚒
+
+En el archivo []() se puede encontrar mayor informacion con respecto al funcionamiento interno de este proyecto para poder realizar modificaciones. 
+
 #### 📚 Información relevante 📚
