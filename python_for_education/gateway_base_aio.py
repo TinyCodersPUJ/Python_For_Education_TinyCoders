@@ -148,7 +148,10 @@ class GatewayBaseAIO(BanyanBaseAIO):
                                    'set_led_rgb' : self.set_led_rgb,
                                    'led_rgb' : self.led_rgb,
                                    'lcd': self.lcd,
-                                   'clear_lcd': self.clear_lcd
+                                   'clear_lcd': self.clear_lcd,
+                                   'circle_lcd': self.circle_lcd,
+                                   'rectangle_lcd': self.rectangle_lcd,
+                                   'triangle_lcd': self.triangle_lcd
                                    }
 
     def init_pins_dictionary(self):
@@ -489,10 +492,34 @@ class GatewayBaseAIO(BanyanBaseAIO):
         """
         raise NotImplementedError
 
-    async def clear_lcd(self):
+    async def clear_lcd(self, topic, payload):
         """
         Must be overwritten by the hardware gateway class.
         Clear what appears on the LCD Screen.
+
+        """
+        raise NotImplementedError
+
+    async def circle_lcd(self):
+        """
+        Must be overwritten by the hardware gateway class.
+        Paint a circle on the LCD Screen.
+
+        """
+        raise NotImplementedError
+
+    async def rectangle_lcd(self, topic, payload):
+        """
+        Must be overwritten by the hardware gateway class.
+        Paint a rectangle on the LCD Screen.
+
+        """
+        raise NotImplementedError
+
+    async def triangle_lcd(self, topic, payload):
+        """
+        Must be overwritten by the hardware gateway class.
+        Paint a triangle on the LCD Screen.
 
         """
         raise NotImplementedError

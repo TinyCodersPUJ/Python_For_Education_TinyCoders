@@ -414,6 +414,39 @@ class ArduinoGateway(GatewayBaseAIO):
 
         """
         await self.arduino.clear_lcd()
+
+    async def circle_lcd(self, topic, payload):
+        """
+        Must be overwritten by the hardware gateway class.
+
+
+        :param topic:
+        :param payload: {"command": "circle_lcd", "x": "X", "y": "Y"}
+
+        """
+        await self.arduino.circle_lcd()
+
+    async def rectangle_lcd(self, topic, payload):
+        """
+        Must be overwritten by the hardware gateway class.
+
+
+        :param topic:
+        :param payload: {"command": "rectangle_lcd", "x": "X", "y": "Y"}
+
+        """
+        await self.arduino.rectangle_lcd()
+    
+    async def triangle_lcd(self, topic, payload):
+        """
+        Must be overwritten by the hardware gateway class.
+
+
+        :param topic:
+        :param payload: {"command": "triangle_lcd", "x": "X", "y": "Y"}
+
+        """
+        await self.arduino.triangle_lcd()
     # Callbacks
     async def digital_input_callback(self, data):
         """

@@ -1499,6 +1499,42 @@ class PymataExpress:
         data = []
         await self._send_sysex(PrivateConstants.LCD,data)        
 
+    async def circle_lcd(self, x=-1, y=-1):
+        """
+        Must be overwritten by the hardware gateway class.
+        Paint a circle on the LCD Screen.
+
+        """
+        if(x == -1 and y == -1):
+            data = []
+        else:
+            data = [x,y]
+        await self._send_sysex(PrivateConstants.CIRCLE_LCD,data) 
+
+    async def rectangle_lcd(self, x=-1, y=-1):
+        """
+        Must be overwritten by the hardware gateway class.
+        Paint a rectangle on the LCD Screen.
+
+        """
+        if(x == -1 and y == -1):
+            data = []
+        else:
+            data = [x,y]
+        await self._send_sysex(PrivateConstants.RECTANGLE_LCD,data)          
+
+    async def triangle_lcd(self, x=-1, y=-1):
+        """
+        Must be overwritten by the hardware gateway class.
+        Paint a triangle on the LCD Screen.
+
+        """
+        if(x == -1 and y == -1):
+            data = []
+        else:
+            data = [x,y]
+        await self._send_sysex(PrivateConstants.TRIANGLE_LCD,data)     
+
     async def _arduino_report_dispatcher(self):
         """
         This is a private method.
