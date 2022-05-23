@@ -47,7 +47,7 @@ class Ui_Dialog(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setGeometry(QtCore.QRect(170, 0, 141, 141))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("./Logo_2.png"))
+        self.label.setPixmap(QtGui.QPixmap("./python_for_education/Logo_2.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.retranslateUi(Dialog)
@@ -55,7 +55,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowIcon(QIcon("./Logo_2.png"))
+        self.setWindowIcon(QIcon("./python_for_education/Logo_2.png"))
         Dialog.setWindowTitle(_translate("Dialog", "Hardware para Educación"))
         self.label_2.setText(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
