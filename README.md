@@ -39,10 +39,11 @@ Dentro de la carpeta _python_for_education_ se encuentran los archivos correspon
 * El archivo _arduino_gateway.py_ es aquel que define las funciones propuestas en el archivo _gateway_base_aio.py_ para el caso del Arduino. 
 * La carpeta _pymata_express_H4E_ contiene distintos modulos que definen constantes y estructuras comunes para los demas programas. 
 
+La carpeta _images_ contiene las imagenes requeridas en este y los demas archivos de explicacion de este repositorio. 
 
 ### ⚒ Funcionamiento ⚒
 
-En la siguiente imagen se presenta una breve explicacion grafica de como los distintos archivos descritos anteriormente se comunican entre si para cumplir la funcion de interconectar el Scratch® modificado y el programa de Arduino. 
+En la siguiente imagen se presenta una breve explicacion grafica de como los distintos archivos descritos anteriormente se ejecutan para cumplir la funcion de interconectar el Scratch® modificado y el programa de Arduino. 
 
 <img src="" width="200" />
 
