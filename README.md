@@ -45,13 +45,27 @@ La carpeta _images_ contiene las imagenes requeridas en este y los demas archivo
 
 En la siguiente imagen se presenta una breve explicacion grafica de como los distintos archivos descritos anteriormente se ejecutan para cumplir la funcion de interconectar el Scratch® modificado y el programa de Arduino. 
 
-<img src="" width="200" />
+<img src="https://github.com/Hardware-For-Education/Python_For_Education/blob/main/images/Programas.png"/>
 
 Como bien se puede observar anteriormente, el Scratch® modificado envia sus mensajes a traves del programa _websocket.py_ hacia el _backplane.py_ este direcciona la comunicacion hacia el gateway correspondiente, en este caso el gateway es el programa _arduino_gateway.py_. Este ya es el punto que envia los mensajes al programa de Arduino a traves del protocolo Firmata. 
 
+Ahora bien, la ejecucion de este proyecto ocurre desde el archivo _interfaz.py_ y este a su vez ejecuta el archivo _s3a.py_. Este dentro de su ejecucion llama los programas _backplane.py_, _websocket.py_ y _arduino_gateway.py_. La siguiente imagen presenta este comportamiento de ejecucion.  
+
+<img src="https://github.com/Hardware-For-Education/Python_For_Education/blob/main/images/python_execution.png" />
+
 #### ⚒ Funcionamiento interno ⚒
 
-En el archivo []() se puede encontrar mayor informacion con respecto al funcionamiento interno de este proyecto para poder realizar modificaciones. 
+en la carpeta _notes_ se encuentran distintos archivos de informacion con respecto al funcionamiento y ejecucion de los distintos archivos principales de este proyecto. 
+
+* En el archivo [funcionamiento_s3a.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_s3a.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar.
+* https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_websocket.md
+* En el archivo [funcionamiento_websocket.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_websocket.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar.
+* En el archivo [funcionamiento_backplane.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_backplane.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar. 
+* En el archivo [funcionamiento_arduino_gateway.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_arduino_gateway.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar.
+
+#### 💿 Creacion ejecutable 💿
+
+Un aspecto importante de este proyecto es la creacion del ejecutable de todo el proyecto. Para esto se realizo una guia que se puede encontrar en el archivo [crear_ejecutable.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/crear_ejecutable.md)
 
 #### 📚 Información relevante 📚
 
