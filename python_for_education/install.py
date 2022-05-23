@@ -17,6 +17,9 @@ subprocess.check_call([sys.executable, '-m', 'pip', 'install',
 subprocess.check_call([sys.executable, '-m', 'pip', 'install',
 'pyserial'])
 
+subprocess.check_call([sys.executable, '-m', 'pip', 'install',
+'PyQt5'])
+
 # process output with an API in the subprocess module:
 reqs = subprocess.check_output([sys.executable, '-m', 'pip',
 'freeze'])
