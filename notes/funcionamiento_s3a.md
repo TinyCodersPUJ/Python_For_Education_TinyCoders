@@ -28,11 +28,11 @@ Se puede encontrar mayor información con respecto al desarrollo de la extensió
 
 ## 💻 s3a.py 💻
 
-s3a.py es el archivo fuente que correponde a la ejecucion principal de la conexion entre el Scratch® y el programa desarrollado en Arduino. En si su funcion principal es ejecutar los demas programas y realizar la conexion entre estos de la forma descrita en la siguiente imagen. 
+s3a.py es el archivo fuente que correponde a la ejecucion principal de la conexion entre el Scratch® y el programa desarrollado en Arduino. En si, su funcion principal es ejecutar los demas programas y realizar la conexion entre estos de la forma descrita en la siguiente imagen. 
 
 <img src="https://github.com/Hardware-For-Education/Python_For_Education/blob/main/images/Programas.png"/>
 
-Este archivo fue creacion principal de [Alan Yoriks](https://github.com/MrYsLabv) en su proyecto [s3-extend](https://github.com/MrYsLab/s3-extend). Este archivo se encuentra en [s3a.py by Alan Yorinks](https://github.com/MrYsLab/s3-extend/blob/master/s3_extend/s3a.py).
+Este archivo fue de creacion principal de [Alan Yoriks](https://github.com/MrYsLabv) en su proyecto [s3-extend](https://github.com/MrYsLab/s3-extend). Este archivo se encuentra en [s3a.py by Alan Yorinks](https://github.com/MrYsLab/s3-extend/blob/master/s3_extend/s3a.py).
 
 ### 🏗 Estructura 🏗
 
