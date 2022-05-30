@@ -20,18 +20,23 @@ Proyecto desarrollado en el marco del trabajo de grado como un requisito para op
 
 ## 💻 websocket.py 💻
 
-websocket.py es el archivo fuente que correponde a la ejecucion del backplane. En si, su funcion principal es ejecutar un programa de conexion entre el websocket y el arduino gateway con la ayuda del framework Python Banyan. De una forma grafica la conexion entre los programas es de la siguiente forma: 
+websocket.py es el archivo fuente que correponde a la ejecucion del websocket. En si, su funcion principal es ejecutar un programa de conexion entre la página web de Scratch modificado y el backplane. De una forma grafica la conexion entre los programas es de la siguiente forma: 
 
 <img src="https://github.com/Hardware-For-Education/Python_For_Education/blob/main/images/Programas.png"/>
 
-Este archivo fue de creacion principal de [Alan Yoriks](https://github.com/MrYsLabv) en su proyecto [s3-extend](https://github.com/MrYsLab/s3-extend). Este archivo se encuentra en [backplane.py by Alan Yorinks](https://github.com/MrYsLab/python_banyan/blob/master/python_banyan/backplane/backplane.py).
+Este archivo fue de creacion principal de [Alan Yoriks](https://github.com/MrYsLabv) en su proyecto [s3-extend](https://github.com/MrYsLab/s3-extend). Este archivo se encuentra en [websocket.py by Alan Yorinks](https://github.com/MrYsLab/python_banyan/blob/master/projects/OneGPIO/shared/ws_gateway.py).
 
 ### 🏗 Estructura 🏗
 
+En sí el programa funciona bajo la premisa de crear un camino de comunicación entre el websocket y programa desarrollado con el framework Python Banyan. Esta clase requiere Python en una versión 3.7 o mayor.
+
+Implementa un servidor websocket. Un cliente websocket, sobre conexión, debe enviar un mensaje de identificación, por ejemplo: {"id": "to_arduino"}. La identificación se utilizará como tema para publicar datos en la red banyan. 
+
+No se realizó modificación a este archivo para este proyecto. 
 
 #### ⚒ Demas programas ⚒
 
-* En el archivo [funcionamiento_websocket.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_websocket.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar.
+* En el archivo [funcionamiento_s3a.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_s3a.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar.
 * En el archivo [funcionamiento_backplane.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_backplane.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar. 
 * En el archivo [funcionamiento_arduino_gateway.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_arduino_gateway.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar.
 
