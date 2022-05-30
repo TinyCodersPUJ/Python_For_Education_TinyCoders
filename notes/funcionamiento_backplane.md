@@ -28,11 +28,14 @@ Este archivo fue de creacion principal de [Alan Yoriks](https://github.com/MrYsL
 
 ### 🏗 Estructura 🏗
 
+Este programa funciona bajo la premisa de conectar los otros dos programas principales. Esta clase instancia un reenviador ZeroMQ que actúa como backplane del software python_banyan. Todos los demás componentes usan una dirección TCP común para conectarse al backplane y reenviar sus mensajes. Consulte [Learning ZMQ](http://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/devices/forwarder.html) para obtener información sobre el reenviador.
+
+Este archivo no sufrió ningún cambio para este proyecto ya que funciona perfectamente. 
 
 #### ⚒ Demas programas ⚒
 
 * En el archivo [funcionamiento_websocket.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_websocket.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar.
-* En el archivo [funcionamiento_backplane.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_backplane.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar. 
+* En el archivo [funcionamiento_s3a.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_s3a.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar. 
 * En el archivo [funcionamiento_arduino_gateway.md](https://github.com/Hardware-For-Education/Python_For_Education/blob/main/notes/funcionamiento_arduino_gateway.md) se puede encontrar mayor informacion con respecto al funcionamiento interno del archivo correspondiente y que modificaciones se pueden realizar.
 
 #### 💿 Creacion ejecutable 💿
