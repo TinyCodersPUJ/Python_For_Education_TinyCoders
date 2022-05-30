@@ -164,11 +164,11 @@ class S3A:
         
         # backplane is not running, so start one
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['python','./python_for_education/backplane.py'],
+            return subprocess.Popen(['python','./backplane.py'],
                                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
                                                   subprocess.CREATE_NO_WINDOW)
         else:
-            return subprocess.Popen(['python','./python_for_education/backplane.py'],
+            return subprocess.Popen(['python','./backplane.py'],
                                     stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                     stdout=subprocess.PIPE)
 
@@ -177,12 +177,12 @@ class S3A:
         Start the websocket gateway
         """
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['python','./python_for_education/websocket.py'],
+            return subprocess.Popen(['python','./websocket.py'],
                                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
                                                   |
                                                   subprocess.CREATE_NO_WINDOW)
         else:
-            return subprocess.Popen(['python','./python_for_education/websocket.py'],
+            return subprocess.Popen(['python','./websocket.py'],
                                     stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                     stdout=subprocess.PIPE)
 
@@ -191,9 +191,9 @@ class S3A:
         Start the arduino gateway
         """
         if sys.platform.startswith('win32'):
-            hwgw_start = ['python','./python_for_education/arduino_gateway.py']
+            hwgw_start = ['python','./arduino_gateway.py']
         else:
-            hwgw_start = ['python','./python_for_education/arduino_gateway.py']
+            hwgw_start = ['python','./arduino_gateway.py']
 
         if self.com_port:
             hwgw_start.append('-c')
