@@ -9,18 +9,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Dialog):
         self.setupUi(self)
 
         self.pushButton.clicked.connect(self.iniciar)
-        self.pushButton_2.clicked.connect(self.instalar)
-    
-    def instalar(self):
-        if sys.platform.startswith('win32'):
-            return subprocess.Popen(['python','./install.py'],
-                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
-                                                  |
-                                                  subprocess.CREATE_NEW_CONSOLE)
-        else:
-            return subprocess.Popen(['python','./install.py'],
-                                    stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                    stdout=subprocess.PIPE)
+        self.pushButton_2.hide()
+
+    # def instalar(self):
+    #     if sys.platform.startswith('win32'):
+    #         return subprocess.Popen(['python','./install.py'],
+    #                                 creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+    #                                               |
+    #                                               subprocess.CREATE_NEW_CONSOLE)
+    #     else:
+    #         return subprocess.Popen(['python','./install.py'],
+    #                                 stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+    #                                 stdout=subprocess.PIPE)
     
     def iniciar(self):
         ##s3a.s3ax()
