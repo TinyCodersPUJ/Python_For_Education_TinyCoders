@@ -4,16 +4,51 @@ import subprocess
 import sys
 import time
 import threading
+import os
 
 class MainWindow(QtWidgets.QMainWindow, Ui_Dialog):
     def __init__(self, *args, **kwargs):
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
 
+        # Set window icon for main window
+        self.set_window_icon()
+
         self.pushButton.clicked.connect(self.iniciar)
         self.pushButton_2.hide()
         self.connection_window = None
         self.process = None
+
+    def set_window_icon(self):
+        """Set the window icon for this window"""
+        try:
+            # Try multiple possible paths for the icon
+            icon_paths = [
+                "images/Logo_2.ico",     # images subfolder
+                "./images/Logo_2.ico",   # Explicit images subfolder
+                "images\\Logo_2.ico",    # Windows path separator
+                os.path.join("images", "Logo_2.ico"),  # Cross-platform path
+                os.path.join(os.path.dirname(__file__), "images", "Logo_2.ico")  # Absolute path from script location
+            ]
+            
+            icon = QtGui.QIcon()
+            icon_loaded = False
+            
+            for icon_path in icon_paths:
+                if os.path.exists(icon_path):
+                    icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.setWindowIcon(icon)
+                    icon_loaded = True
+                    print(f"Successfully loaded icon from: {icon_path}")
+                    break
+            
+            if not icon_loaded:
+                print("Could not find Logo_2.ico in any of the expected locations")
+                print("Current working directory:", os.getcwd())
+                print("Script location:", os.path.dirname(__file__))
+                
+        except Exception as e:
+            print(f"Could not load Logo_2.ico: {e}")
 
     def iniciar(self):
         try:
@@ -85,6 +120,37 @@ class ConnectionWindow(QtWidgets.QDialog):
     def set_process(self, process):
         """Set the s3a.py process reference"""
         self.process = process
+
+    def set_window_icon(self):
+        """Set the window icon for this window"""
+        try:
+            # Try multiple possible paths for the icon
+            icon_paths = [
+                "images/Logo_2.ico",     # images subfolder
+                "./images/Logo_2.ico",   # Explicit images subfolder
+                "images\\Logo_2.ico",    # Windows path separator
+                os.path.join("images", "Logo_2.ico"),  # Cross-platform path
+                os.path.join(os.path.dirname(__file__), "images", "Logo_2.ico")  # Absolute path from script location
+            ]
+            
+            icon = QtGui.QIcon()
+            icon_loaded = False
+            
+            for icon_path in icon_paths:
+                if os.path.exists(icon_path):
+                    icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                    self.setWindowIcon(icon)
+                    icon_loaded = True
+                    print(f"Successfully loaded icon from: {icon_path}")
+                    break
+            
+            if not icon_loaded:
+                print("Could not find Logo_2.ico in any of the expected locations")
+                print("Current working directory:", os.getcwd())
+                print("Script location:", os.path.dirname(__file__))
+                
+        except Exception as e:
+            print(f"Could not load Logo_2.ico: {e}")
         
     def setupUi(self):
         self.setObjectName("ConnectionDialog")
@@ -92,6 +158,9 @@ class ConnectionWindow(QtWidgets.QDialog):
         self.setWindowTitle("Hardware para Educación")
         self.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.setWindowFlags(QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint | QtCore.Qt.WindowStaysOnTopHint)
+        
+        # Set window icon
+        self.set_window_icon()
         
         # Main layout
         self.layout = QtWidgets.QVBoxLayout(self)
@@ -277,6 +346,37 @@ class ConnectionWindow(QtWidgets.QDialog):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
+    
+    # Set application icon (affects all windows and taskbar by default)
+    try:
+        # Try multiple possible paths for the application icon
+        icon_paths = [
+            "images/Logo_2.ico",     # images subfolder
+            "./images/Logo_2.ico",   # Explicit images subfolder
+            "images\\Logo_2.ico",    # Windows path separator
+            os.path.join("images", "Logo_2.ico"),  # Cross-platform path
+            os.path.join(os.path.dirname(__file__), "images", "Logo_2.ico")  # Absolute path from script location
+        ]
+        
+        app_icon = QtGui.QIcon()
+        icon_loaded = False
+        
+        for icon_path in icon_paths:
+            if os.path.exists(icon_path):
+                app_icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                app.setWindowIcon(app_icon)
+                icon_loaded = True
+                print(f"Successfully loaded application icon from: {icon_path}")
+                break
+        
+        if not icon_loaded:
+            print("Could not find Logo_2.ico for application icon in any of the expected locations")
+            print("Current working directory:", os.getcwd())
+            print("Script location:", os.path.dirname(__file__))
+            
+    except Exception as e:
+        print(f"Could not load application icon: {e}")
+    
     window = MainWindow()
     window.show()
     app.exec_()
