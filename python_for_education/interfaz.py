@@ -64,27 +64,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Dialog):
             # Process failed, show error in main thread
             self.connection_window.error_signal.emit()
 
-    def restart_app(self):
-        """Restart the application"""
-        try:
-            if self.process and self.process.poll() is None:
-                # Terminate the s3a.py process
-                if sys.platform.startswith('win32'):
-                    subprocess.run(['taskkill', '/F', '/T', '/PID', str(self.process.pid)], 
-                                 creationflags=subprocess.CREATE_NO_WINDOW)
-                else:
-                    self.process.terminate()
-                    self.process.wait(timeout=5)
-        except Exception as e:
-            print(f"Error closing process: {e}")
-        finally:
-            # Close connection window and show main window
-            if self.connection_window:
-                self.connection_window.close()
-                self.connection_window = None
-            self.process = None
-            self.show()
-
 
 class ConnectionWindow(QtWidgets.QDialog):
     # Define custom signals
@@ -168,26 +147,6 @@ class ConnectionWindow(QtWidgets.QDialog):
         self.button_layout = QtWidgets.QHBoxLayout(self.button_widget)
         self.button_layout.setContentsMargins(0, 0, 0, 0)
         
-        # Try again button (initially hidden)
-        self.try_again_button = QtWidgets.QPushButton("Intentar de Nuevo")
-        self.try_again_button.setFixedHeight(40)
-        self.try_again_button.setStyleSheet("""
-            QPushButton {
-                background-color: rgb(76, 175, 80);
-                color: white;
-                font: 12pt 'Satoshi';
-                border: none;
-                border-radius: 8px;
-                padding: 10px 20px;
-            }
-            QPushButton:hover {
-                background-color: rgb(56, 142, 60);
-            }
-        """)
-        self.try_again_button.clicked.connect(self.try_again)
-        self.try_again_button.hide()
-        self.button_layout.addWidget(self.try_again_button)
-        
         # Close button (initially hidden)
         self.close_button = QtWidgets.QPushButton("Cerrar Aplicación")
         self.close_button.setFixedHeight(40)
@@ -223,7 +182,6 @@ class ConnectionWindow(QtWidgets.QDialog):
         
         # Show progress bar, hide buttons
         self.progress_bar.show()
-        self.try_again_button.hide()
         self.close_button.hide()
         
         # Force update
@@ -246,7 +204,6 @@ class ConnectionWindow(QtWidgets.QDialog):
         
         # Hide progress bar, show only close button
         self.progress_bar.hide()
-        self.try_again_button.hide()
         self.close_button.show()
         
         # Start monitoring the process
@@ -273,18 +230,9 @@ class ConnectionWindow(QtWidgets.QDialog):
         self.status_label.setText("Estado: Desconectado")
         self.status_label.setStyleSheet("font: 16pt 'Satoshi'; font-weight: bold; color: rgb(244, 67, 54);")
         
-        # Hide progress bar, show both buttons
+        # Hide progress bar, show only close button
         self.progress_bar.hide()
-        self.try_again_button.show()
         self.close_button.show()
-
-    def try_again(self):
-        """Try to reconnect"""
-        # Get reference to main window and restart
-        for widget in QtWidgets.QApplication.topLevelWidgets():
-            if isinstance(widget, MainWindow):
-                widget.restart_app()
-                break
 
     def check_process_status(self):
         """Monitor the s3a.py process status"""
