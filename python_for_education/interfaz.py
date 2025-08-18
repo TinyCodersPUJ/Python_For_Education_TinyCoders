@@ -344,39 +344,53 @@ class ConnectionWindow(QtWidgets.QDialog):
             event.ignore()
 
 
-if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+def set_app_icon():
+    """Helper function to set application icon"""
+    icon_paths = [
+        "images/Logo_2.ico",     # images subfolder
+        "./images/Logo_2.ico",   # Explicit images subfolder
+        "images\\Logo_2.ico",    # Windows path separator
+        os.path.join("images", "Logo_2.ico"),  # Cross-platform path
+        os.path.join(os.path.dirname(__file__), "images", "Logo_2.ico")  # Absolute path from script location
+    ]
     
-    # Set application icon (affects all windows and taskbar by default)
-    try:
-        # Try multiple possible paths for the application icon
-        icon_paths = [
-            "images/Logo_2.ico",     # images subfolder
-            "./images/Logo_2.ico",   # Explicit images subfolder
-            "images\\Logo_2.ico",    # Windows path separator
-            os.path.join("images", "Logo_2.ico"),  # Cross-platform path
-            os.path.join(os.path.dirname(__file__), "images", "Logo_2.ico")  # Absolute path from script location
-        ]
-        
-        app_icon = QtGui.QIcon()
-        icon_loaded = False
-        
-        for icon_path in icon_paths:
-            if os.path.exists(icon_path):
-                app_icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                app.setWindowIcon(app_icon)
-                icon_loaded = True
-                print(f"Successfully loaded application icon from: {icon_path}")
-                break
-        
-        if not icon_loaded:
-            print("Could not find Logo_2.ico for application icon in any of the expected locations")
-            print("Current working directory:", os.getcwd())
-            print("Script location:", os.path.dirname(__file__))
-            
-    except Exception as e:
-        print(f"Could not load application icon: {e}")
+    for icon_path in icon_paths:
+        if os.path.exists(icon_path):
+            print(f"Found icon at: {icon_path}")
+            return QtGui.QIcon(icon_path)
+    
+    print("Could not find Logo_2.ico in any of the expected locations")
+    print("Current working directory:", os.getcwd())
+    print("Script location:", os.path.dirname(__file__))
+    return None
+
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    
+    # Set application properties for better taskbar integration
+    app.setApplicationName("Hardware para Educación")
+    app.setApplicationDisplayName("Hardware para Educación")
+    app.setApplicationVersion("1.0")
+    app.setOrganizationName("Hardware para Educación")
+    
+    # Set application icon for taskbar
+    app_icon = set_app_icon()
+    if app_icon:
+        app.setWindowIcon(app_icon)
+        print("Application icon set successfully")
+    else:
+        print("Failed to set application icon")
+    
+    # For Windows: Set the App User Model ID for better taskbar grouping
+    if sys.platform.startswith('win32'):
+        try:
+            import ctypes
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("HardwareEducacion.MainApp.1.0")
+        except:
+            pass  # Ignore if this fails
     
     window = MainWindow()
     window.show()
-    app.exec_()
+    
+    sys.exit(app.exec_())
