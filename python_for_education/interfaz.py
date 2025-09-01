@@ -11,6 +11,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Dialog):
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
 
+        # Always show minimize button
+        self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowMinimizeButtonHint)
+
         # Set window icon for main window
         self.set_window_icon()
 
@@ -39,16 +42,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Dialog):
                     icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
                     self.setWindowIcon(icon)
                     icon_loaded = True
-                    print(f"Successfully loaded icon from: {icon_path}")
                     break
             
-            if not icon_loaded:
-                print("Could not find Logo_2.ico in any of the expected locations")
-                print("Current working directory:", os.getcwd())
-                print("Script location:", os.path.dirname(__file__))
-                
         except Exception as e:
-            print(f"Could not load Logo_2.ico: {e}")
+            pass
 
     def iniciar(self):
         try:
@@ -61,14 +58,34 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Dialog):
             # Force GUI to update and show the loading window
             QtWidgets.QApplication.processEvents()
             
-            # Start the s3a.py process without showing terminal
+            # Start the s3a.py process without showing terminal - ENHANCED FOR ALL PLATFORMS
             if sys.platform.startswith('win32'):
-                self.process = subprocess.Popen(['python','./s3a.py'],
-                                              creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
-                                                            |
-                                                            subprocess.CREATE_NO_WINDOW,
-                                              stdout=subprocess.PIPE,
-                                              stderr=subprocess.PIPE)
+                # Use pythonw.exe to avoid console window + enhanced hiding
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                startupinfo.wShowWindow = subprocess.SW_HIDE
+                
+                # Try pythonw first, then python as fallback
+                python_executables = ['pythonw', 'python']
+                
+                for python_exe in python_executables:
+                    try:
+                        self.process = subprocess.Popen([python_exe, './s3a.py'],
+                                                      creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+                                                                    |
+                                                                    subprocess.CREATE_NO_WINDOW,
+                                                      stdout=subprocess.PIPE,
+                                                      stderr=subprocess.PIPE,
+                                                      stdin=subprocess.PIPE,
+                                                      startupinfo=startupinfo,
+                                                      cwd=os.getcwd())
+                        break
+                    except FileNotFoundError:
+                        continue
+                        
+                if not hasattr(self, 'process') or self.process is None:
+                    raise Exception("No se pudo encontrar Python")
+                    
             else:
                 self.process = subprocess.Popen(['python','./s3a.py'],
                                               stdin=subprocess.PIPE, 
@@ -117,6 +134,10 @@ class ConnectionWindow(QtWidgets.QDialog):
         
         self.setupUi()
         
+        # Always show minimize button
+        self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowMinimizeButtonHint)
+
+        
     def set_process(self, process):
         """Set the s3a.py process reference"""
         self.process = process
@@ -141,16 +162,10 @@ class ConnectionWindow(QtWidgets.QDialog):
                     icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
                     self.setWindowIcon(icon)
                     icon_loaded = True
-                    print(f"Successfully loaded icon from: {icon_path}")
                     break
-            
-            if not icon_loaded:
-                print("Could not find Logo_2.ico in any of the expected locations")
-                print("Current working directory:", os.getcwd())
-                print("Script location:", os.path.dirname(__file__))
                 
         except Exception as e:
-            print(f"Could not load Logo_2.ico: {e}")
+            pass
         
     def setupUi(self):
         self.setObjectName("ConnectionDialog")
@@ -240,8 +255,6 @@ class ConnectionWindow(QtWidgets.QDialog):
 
     def show_loading(self):
         """Show loading state"""
-        print("DEBUG: show_loading called")  # Debug print
-        
         self.icon_label.setText("⏳")
         self.icon_label.setStyleSheet("font-size: 48px; color: rgb(33, 150, 243);")
         self.message_label.setText("Conectando...")
@@ -256,14 +269,10 @@ class ConnectionWindow(QtWidgets.QDialog):
         # Force update
         self.update()
         self.repaint()
-        
-        print("DEBUG: Loading UI updated")  # Debug print
 
     @QtCore.pyqtSlot()
     def show_success(self):
         """Show success state"""
-        print("DEBUG: show_success called")  # Debug print
-        
         self.icon_label.setText("✓")
         self.icon_label.setStyleSheet("font-size: 48px; color: rgb(76, 175, 80);")
         self.message_label.setText("¡La conexión fue exitosa!")
@@ -284,8 +293,6 @@ class ConnectionWindow(QtWidgets.QDialog):
     @QtCore.pyqtSlot()
     def show_error(self):
         """Show error state"""
-        print("DEBUG: show_error called")  # Debug print
-        
         # Show error message box first
         QtWidgets.QMessageBox.critical(self, "Error de Conexión", 
                                      "No se pudo establecer la conexión. "
@@ -317,15 +324,17 @@ class ConnectionWindow(QtWidgets.QDialog):
         """Close the application and terminate the s3a.py process"""
         try:
             if self.process and self.process.poll() is None:
-                # Terminate the s3a.py process
+                # Terminate the s3a.py process - ENHANCED FOR WINDOWS
                 if sys.platform.startswith('win32'):
                     subprocess.run(['taskkill', '/F', '/T', '/PID', str(self.process.pid)], 
-                                 creationflags=subprocess.CREATE_NO_WINDOW)
+                                 creationflags=subprocess.CREATE_NO_WINDOW,
+                                 stdout=subprocess.DEVNULL,
+                                 stderr=subprocess.DEVNULL)
                 else:
                     self.process.terminate()
                     self.process.wait(timeout=5)
         except Exception as e:
-            print(f"Error closing process: {e}")
+            pass
         finally:
             QtWidgets.QApplication.quit()
 
@@ -356,16 +365,26 @@ def set_app_icon():
     
     for icon_path in icon_paths:
         if os.path.exists(icon_path):
-            print(f"Found icon at: {icon_path}")
             return QtGui.QIcon(icon_path)
     
-    print("Could not find Logo_2.ico in any of the expected locations")
-    print("Current working directory:", os.getcwd())
-    print("Script location:", os.path.dirname(__file__))
     return None
 
 
 if __name__ == "__main__":
+    # ENHANCED console hiding for Windows
+    if sys.platform.startswith('win32'):
+        import ctypes
+        try:
+            # Hide console window immediately
+            console_window = ctypes.windll.kernel32.GetConsoleWindow()
+            if console_window != 0:
+                ctypes.windll.user32.ShowWindow(console_window, 0)  # 0 = SW_HIDE
+                
+            # Also hide any parent console windows
+            ctypes.windll.kernel32.FreeConsole()
+        except:
+            pass
+    
     app = QtWidgets.QApplication(sys.argv)
     
     # Set application properties for better taskbar integration
@@ -378,9 +397,6 @@ if __name__ == "__main__":
     app_icon = set_app_icon()
     if app_icon:
         app.setWindowIcon(app_icon)
-        print("Application icon set successfully")
-    else:
-        print("Failed to set application icon")
     
     # For Windows: Set the App User Model ID for better taskbar grouping
     if sys.platform.startswith('win32'):
@@ -388,7 +404,7 @@ if __name__ == "__main__":
             import ctypes
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("HardwareEducacion.MainApp.1.0")
         except:
-            pass  # Ignore if this fails
+            pass
     
     window = MainWindow()
     window.show()
