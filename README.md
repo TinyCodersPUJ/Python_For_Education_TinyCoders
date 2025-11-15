@@ -1,6 +1,6 @@
 # 👋 Python for Education 👋
 
-#### 👨‍💻👩‍💻 Proyecto desarrollado por 👨‍💻👩‍💻
+#### 👨‍💻👩‍💻 Proyecto Desarrollado Originalmente por 👨‍💻👩‍💻
 * [Alejandro Castro Martínez](https://github.com/kstro96)
 * [Janet Chen He](https://github.com/XingYi98)
 * [María José Niño Rodríguez](https://github.com/mjninor99)
@@ -9,7 +9,13 @@
 * [Sergio Enrique González Martínez](https://github.com/SE-GONZALEZ)
 * [Juan José Pinilla Varon](https://github.com/JuanPinilla13)
 * [Mateo Felipe Ariza Ordoñez](https://github.com/mateoariza)
-
+### Nuevos Cambios Realizados Por:
+* Equpo de [TinyCoders](https://github.com/TinyCodersPUJ): Cambios a la interfaz gráfica de usuario original:
+  - Retiro del botón que era usado para instalar las librerias.
+  - Flujo de usuario usando únicamente interfaces gráficas.
+  - Pantallas de carga para el proceso de creación de los websockets.
+  - Pantallas de verificación y terminación de la conexión.
+  - Alerta en caso de no poder generar la conexión.
 #### 👨‍🏫👩‍🏫 Bajo la dirección de 👨‍🏫👩‍🏫 
 * Ing. MsC. Martha Cano Morales
 * Ing. MsC. PhD. Jairo Alberto Hurtado
