@@ -169,7 +169,7 @@ class ConnectionWindow(QtWidgets.QDialog):
         
     def setupUi(self):
         self.setObjectName("ConnectionDialog")
-        self.resize(400, 300)  # Increased height to accommodate all elements
+        self.resize(500, 400)  # Increased height to accommodate all elements
         self.setWindowTitle("Hardware para Educación")
         self.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.setWindowFlags(QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint | QtCore.Qt.WindowStaysOnTopHint)
@@ -199,7 +199,7 @@ class ConnectionWindow(QtWidgets.QDialog):
         self.secondary_message_label = QtWidgets.QLabel()
         self.secondary_message_label.setAlignment(QtCore.Qt.AlignCenter)
         self.secondary_message_label.setWordWrap(True)
-        self.secondary_message_label.setStyleSheet("font: 12pt 'Satoshi'; color: rgb(102, 102, 102);")
+        self.secondary_message_label.setStyleSheet("font: 26pt 'Satoshi'; color: rgb(102, 102, 102);")
         self.layout.addWidget(self.secondary_message_label)
         
         # Status label
@@ -232,13 +232,14 @@ class ConnectionWindow(QtWidgets.QDialog):
         self.button_layout.setContentsMargins(0, 0, 0, 0)
         
         # Close button (initially hidden)
-        self.close_button = QtWidgets.QPushButton("Cerrar Aplicación")
+        self.close_button = QtWidgets.QPushButton("Salir del TODO")
         self.close_button.setFixedHeight(40)
         self.close_button.setStyleSheet("""
             QPushButton {
                 background-color: rgb(244, 67, 54);
                 color: white;
-                font: 12pt 'Satoshi';
+                font: 16pt 'Satoshi';
+                font-weight: bold;
                 border: none;
                 border-radius: 8px;
                 padding: 10px 20px;
@@ -258,7 +259,7 @@ class ConnectionWindow(QtWidgets.QDialog):
         self.icon_label.setText("⏳")
         self.icon_label.setStyleSheet("font-size: 48px; color: rgb(33, 150, 243);")
         self.message_label.setText("Conectando...")
-        self.secondary_message_label.setText("Estableciendo conexión con el dispositivo")
+        self.secondary_message_label.setText("Estableciendo conexión con el dispositivo ...")
         self.status_label.setText("Estado: Conectando")
         self.status_label.setStyleSheet("font: 16pt 'Satoshi'; font-weight: bold; color: rgb(33, 150, 243);")
         
@@ -276,7 +277,7 @@ class ConnectionWindow(QtWidgets.QDialog):
         self.icon_label.setText("✓")
         self.icon_label.setStyleSheet("font-size: 48px; color: rgb(76, 175, 80);")
         self.message_label.setText("¡La conexión fue exitosa!")
-        self.secondary_message_label.setText("No cierre esta ventana mientras use la aplicación.")
+        self.secondary_message_label.setText("¡No cierre esta ventana mientras use la aplicación!")
         self.status_label.setText("Estado: Conectado")
         self.status_label.setStyleSheet("font: 16pt 'Satoshi'; font-weight: bold; color: rgb(76, 175, 80);")
         
@@ -296,7 +297,7 @@ class ConnectionWindow(QtWidgets.QDialog):
         # Show error message box first
         QtWidgets.QMessageBox.critical(self, "Error de Conexión", 
                                      "No se pudo establecer la conexión. "
-                                     "Verifique que Arduino esté conectado.")
+                                     "Verifique que el dispositivo esté conectado.")
         
         # Then update the UI
         self.icon_label.setText("✗")

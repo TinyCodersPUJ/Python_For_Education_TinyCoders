@@ -23,7 +23,7 @@ class Ui_Dialog(object):
         self.label_2.setWordWrap(True)
         self.label_2.setObjectName("label_2")
         self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(60, 275, 351, 31))
+        self.pushButton.setGeometry(QtCore.QRect(60, 275, 350, 50))
         self.pushButton.setStyleSheet("background-color: rgb(201, 226, 101);\n"
 "font: 12pt \"Satoshi\";\n"
 "border-radius:10px")
@@ -60,10 +60,10 @@ class Ui_Dialog(object):
         self.label_2.setText(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Satoshi\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:40px; margin-right:40px; -qt-block-indent:0; text-indent:0px;\">¡Hola! Te damos la bienvenida a nuestro Hardware para Educación. Para descargar las librerias orpime el botón de instalar, para conectarte oprime el botón de empezar</p></body></html>"))
-        self.pushButton.setText(_translate("Dialog", "Empezar"))
-        self.pushButton_2.setText(_translate("Dialog", "Instalar"))
+"</style></head><body style=\" font-family:\'Satoshi\'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:40px; margin-right:40px; -qt-block-indent:0; text-indent:0px;\">¡Hola! Te damos la bienvenida a  Hardware para Educación. Presiona el botón EMPEZAR</p></body></html>"))
+        self.pushButton.setText(_translate("Dialog", "EMPEZAR"))
+        # self.pushButton_2.setText(_translate("Dialog", "Instalar"))
     
 
 if __name__ == "__main__":
